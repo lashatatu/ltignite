@@ -20,8 +20,7 @@ text-align: center;
   img {
     width: 100%;
     height: 40vh;
-    object-fit: cover;
-    
+    object-fit: cover;    
   }
 `;
 
