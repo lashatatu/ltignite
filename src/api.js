@@ -16,7 +16,7 @@ const getCurrentDay = () => {
     return day;
   }
 };
-const myKey=process.env.YOUR_API_KEY
+const myKey=process.env.REACT_APP_DEV_YOUR_API_KEY
 const currentYear = new Date().getFullYear();
 const currentMonth = getCurrentMonth();
 const currentDay = getCurrentDay();
@@ -26,7 +26,7 @@ const nextYear = `${currentYear + 1}-${currentMonth}-${currentDay}`;
 
 const popular_games = `games?key=${myKey}&dates=${lastYear},${currentDate}&ordering=-rating&page_size=10`;
 const upcoming_games=`games?key=${myKey}&dates=${currentDate},${nextYear}&ordering=-added&page_size=10`
-const newGames=`games?dates=${myKey}&dates=${lastYear},${currentDate}&ordering=-released&page_size=10`
+const newGames=`games?key=${myKey}&dates=${lastYear},${currentDate}&ordering=-released&page_size=10`
 
 export const popularGamesURL = () => `${base_url}${popular_games}`;
 export const upcomingGamesURL = () => `${base_url}${upcoming_games}`;

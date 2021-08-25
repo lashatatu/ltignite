@@ -4,7 +4,6 @@ const initState = {
   upcoming: [],
   searched: [],
 };
-
 const gamesReducer = (state = initState, action) => {
   switch (action.type) {
     case "FETCH_GAMES":
@@ -18,5 +17,4 @@ const gamesReducer = (state = initState, action) => {
       return { ...state };
   }
 };
-
 export default gamesReducer;
