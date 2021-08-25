@@ -8,7 +8,7 @@ const Home = () => {
 		dispatch(loadGames());
 	});
 	return <div>
-		<h1>Home</h1>
+		<h1>Homea</h1>
 	</div>;
 };
 
