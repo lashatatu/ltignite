@@ -1,5 +1,7 @@
+//Base URL
 const base_url = "https://api.rawg.io/api/";
 
+//Getting the date
 const getCurrentMonth = () => {
   const month = new Date().getMonth() + 1;
   if (month < 10) {
@@ -8,6 +10,7 @@ const getCurrentMonth = () => {
     return month;
   }
 };
+//Getting the date
 const getCurrentDay = () => {
   const day = new Date().getDate();
   if (day < 10) {
@@ -37,6 +40,6 @@ export const gameDetailsURL = (game_id) =>
 export const gameScreenshotURL = (game_id) =>
   `${base_url}?games/${game_id}/screenshots?key=${myKey}`;
 export const searchGameURL = (game_name) =>
-   `${base_url}games?search=${game_name}?key=${myKey}&page_size=9`;
+   `${base_url}games?search=${game_name}&page_size=9?key=${myKey}`;
 
 console.log(upcomingGamesURL);

@@ -1,41 +1,48 @@
 import React from "react";
-import { useSelector } from "react-redux";
+//Styling and Animation
 import styled from "styled-components";
 import { motion } from "framer-motion";
+//Redux
+import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { smallImage } from "../util";
+//IMAGES
 import playstation from "../img/playstation.svg";
 import steam from "../img/steam.svg";
 import xbox from "../img/xbox.svg";
 import nintendo from "../img/nintendo.svg";
 import apple from "../img/apple.svg";
 import gamepad from "../img/gamepad.svg";
+//Star Images
 import starEmpty from "../img/star-empty.png";
 import starFull from "../img/star-full.png";
 
 const GameDetail = ({ pathId }) => {
   const history = useHistory();
-  const exitDetailHandler = (e) => {
+
+  //Exit Detail
+  const exitDetailHander = (e) => {
     const element = e.target;
     if (element.classList.contains("shadow")) {
       document.body.style.overflow = "auto";
       history.push("/");
     }
   };
-
+  //Get Stars
   const getStars = () => {
     const stars = [];
     const rating = Math.floor(game.rating);
     for (let i = 1; i <= 5; i++) {
       if (i <= rating) {
-        stars.push(<img alt={"star"} key={i} src={starFull} />);
+        stars.push(<img alt="star" key={i} src={starFull}></img>);
       } else {
-        stars.push(<img alt={"star"} key={i} src={starEmpty} />);
+        stars.push(<img alt="star" key={i} src={starEmpty}></img>);
       }
     }
-    return stars
+    return stars;
   };
 
+  //GET PLATFORM IMAGES
   const getPlatform = (platform) => {
     switch (platform) {
       case "PlayStation 4":
@@ -46,18 +53,19 @@ const GameDetail = ({ pathId }) => {
         return steam;
       case "Nintendo Switch":
         return nintendo;
-      case "IOS":
+      case "iOS":
         return apple;
       default:
         return gamepad;
     }
   };
+
   //Data
   const { screen, game, isLoading } = useSelector((state) => state.detail);
   return (
     <>
       {!isLoading && (
-        <CardShadow className={"shadow"} onClick={exitDetailHandler}>
+        <CardShadow className="shadow" onClick={exitDetailHander}>
           <Detail layoutId={pathId}>
             <Stats>
               <div className="rating">
@@ -89,9 +97,13 @@ const GameDetail = ({ pathId }) => {
               <p>{game.description_raw}</p>
             </Description>
             {/*<div className="gallery">*/}
-            {/*	{screen.results.map((screen) => (*/}
-            {/*		 <img key={smallImage(screen.id,1280)} src={screen.image}  alt={screen.image} />*/}
-            {/*	))}*/}
+            {/*  {screen.results.map((screen) => (*/}
+            {/*    <img*/}
+            {/*      src={smallImage(screen.image, 1280)}*/}
+            {/*      key={screen.id}*/}
+            {/*      alt={screen.image}*/}
+            {/*    />*/}
+            {/*  ))}*/}
             {/*</div>*/}
           </Detail>
         </CardShadow>
@@ -142,7 +154,7 @@ const Stats = styled(motion.div)`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  img{
+  img {
     width: 2rem;
     height: 2rem;
     display: inline;
@@ -154,7 +166,6 @@ const Info = styled(motion.div)`
 const Platforms = styled(motion.div)`
   display: flex;
   justify-content: space-evenly;
-
   img {
     margin-left: 3rem;
   }
@@ -162,7 +173,6 @@ const Platforms = styled(motion.div)`
 
 const Media = styled(motion.div)`
   margin-top: 5rem;
-
   img {
     width: 100%;
   }

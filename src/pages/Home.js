@@ -1,32 +1,35 @@
 import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-
-import { loadGames } from "../actions/gamesAction";
-import Game from "../components/Game";
-import styled from "styled-components";
-import { AnimatePresence, AnimateSharedLayout, motion } from "framer-motion";
 import GameDetail from "../components/GameDetail";
-import {useLocation} from "react-router-dom";
+//Redux
+import { useDispatch, useSelector } from "react-redux";
+import { loadGames } from "../actions/gamesAction";
+//Components
+import Game from "../components/Game";
+//Styling and Animation
+import styled from "styled-components";
+import { motion, AnimatePresence, AnimateSharedLayout } from "framer-motion";
+import { useLocation } from "react-router-dom";
 import { fadeIn } from "../animations";
 
 const Home = () => {
-	const location=useLocation()
-	const pathID=location.pathname.split('/')[2]
+  //get the current location
+  const location = useLocation();
+  const pathId = location.pathname.split("/")[2];
 
+  //FETCH GAMES
 	const dispatch = useDispatch();
 	useEffect(() => {
 		dispatch(loadGames());
 	}, [dispatch]);
-
+  //Get that data back
 	const { popular, newGames, upcoming, searched } = useSelector(
 		 (state) => state.games
 	);
-
 	return (
 		 <GameList variants={fadeIn} initial="hidden" animate="show">
-			<AnimateSharedLayout type={'crossfade'}>
+      <AnimateSharedLayout type="crossfade">
 			<AnimatePresence>
-				{pathID && <GameDetail pathId={pathID} />}
+          {pathId && <GameDetail pathId={pathId} />}
 			</AnimatePresence>
 				{searched.length ? (
 					 <div className="searched">
@@ -46,7 +49,7 @@ const Home = () => {
 				) : (
 						""
 				 )}
-      <h2>Upcoming games</h2>
+        <h2>Upcoming Games</h2>
       <Games>
         {upcoming.map((game) => (
           <Game
@@ -70,7 +73,7 @@ const Home = () => {
           />
         ))}
       </Games>
-      <h2>New games</h2>
+        <h2>New Games</h2>
       <Games>
         {newGames.map((game) => (
           <Game
@@ -89,17 +92,17 @@ const Home = () => {
 
 const GameList = styled(motion.div)`
   padding: 0rem 5rem;
-
   h2 {
     padding: 5rem 0rem;
   }
 `;
+
 const Games = styled(motion.div)`
   min-height: 80vh;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
   grid-column-gap: 3rem;
   grid-row-gap: 5rem;
-
 `;
+
 export default Home;
