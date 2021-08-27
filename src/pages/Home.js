@@ -4,8 +4,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { loadGames } from "../actions/gamesAction";
 import Game from "../components/Game";
 import styled from "styled-components";
-import { motion } from "framer-motion";
-import GameDetail from "../components/gameDetail";
+import { AnimatePresence, AnimateSharedLayout, motion } from "framer-motion";
+import GameDetail from "../components/GameDetail";
 import {useLocation} from "react-router-dom";
 
 const Home = () => {
@@ -21,7 +21,10 @@ const Home = () => {
 
 	return (
     <GameList>
-      {pathID && <GameDetail />}
+			<AnimateSharedLayout type={'crossfade'}>
+			<AnimatePresence>
+				{pathID && <GameDetail pathId={pathID} />}
+			</AnimatePresence>
       <h2>Upcoming games</h2>
       <Games>
         {upcoming.map((game) => (
@@ -58,6 +61,7 @@ const Home = () => {
           />
         ))}
       </Games>
+			</AnimateSharedLayout>
     </GameList>
   );
 };
